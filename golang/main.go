@@ -18,6 +18,7 @@ import (
 	"flag"
 	"log"
 	"fmt"
+	"strconv"
 	"net/http"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -27,13 +28,12 @@ import (
 var addr = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
 
 func main() {
-        name := "bla"
 	for i := 0; i < 2000; i++ {
 	c := prometheus.NewCounter(prometheus.CounterOpts{
-				Name: fmt.Sprintf("my_collector_%d", i),
+				Name: fmt.Sprintf("counter%d", i),
 				ConstLabels: prometheus.Labels{
-					"name": name,
-					"type": "test",
+					"number": strconv.Itoa(i),
+					"foo": "bar",
 				},
 			})
 	c.Add(11.22)
