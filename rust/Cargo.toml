@@ -1,0 +1,12 @@
+[package]
+name = "prometheus_exporter_test"
+version = "0.0.1"
+authors = ["danni@redislabs.com"]
+edition = "2018"
+
+[dependencies]
+prometheus_exporter = "0.7.2"
+reqwest = { version = "0.10", features = ["blocking"] }
+rand = "0.7"
+env_logger = "0.8"
+log = { version = "0.4" }
