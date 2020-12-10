@@ -26,21 +26,23 @@ import (
 )
 
 var addr = flag.String("listen-address", ":8080", "The address to listen on for HTTP requests.")
+var num_counters = flag.Int("counters", 2000, "Number of generated counters")
 
 func main() {
-	for i := 0; i < 2000; i++ {
-	c := prometheus.NewCounter(prometheus.CounterOpts{
+	flag.Parse()
+
+	for i := 0; i < *num_counters; i++ {
+		c := prometheus.NewCounter(prometheus.CounterOpts{
 				Name: fmt.Sprintf("counter%d", i),
 				ConstLabels: prometheus.Labels{
 					"number": strconv.Itoa(i),
 					"foo": "bar",
 				},
 			})
-	c.Add(11.22)
-	
-	prometheus.MustRegister(c)
-}
-	flag.Parse()
+		c.Add(11.22)
+		prometheus.MustRegister(c)
+	}
+
 	http.Handle("/metrics", promhttp.HandlerFor(
 		prometheus.DefaultGatherer,
 		promhttp.HandlerOpts{},

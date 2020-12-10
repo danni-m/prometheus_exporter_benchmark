@@ -2,6 +2,7 @@ from prometheus_client import start_http_server, Summary, Gauge, Counter, exposi
 import random
 import time
 import resource
+import sys
 
 
 
@@ -18,7 +19,11 @@ def process_request(t):
 
 if __name__ == '__main__':
     counters = []
-    for i in range(2000):
+    if len(sys.argv) > 1:
+        num_counters = int(sys.argv[1])
+    else:
+        num_counters = 2000
+    for i in range(num_counters):
         g = Gauge("counter{0}".format(i), "help", ['number', 'foo'])
         counters.append([i,g])
     print("After creating counters: ", resource.getrusage(0).ru_maxrss)
