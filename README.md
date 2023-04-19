@@ -41,3 +41,22 @@ Requests/sec:    564.91
 Transfer/sec:    118.18MB
 ```
 
+# Python
+## Running
+```
+python3.11 main.py
+```
+
+## Results
+```
+➜ wrk -d 30s -t 10 -c 20 http://localhost:8080/metrics
+Running 30s test @ http://localhost:8080/metrics
+  10 threads and 20 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    54.87ms   11.25ms 167.73ms   79.60%
+    Req/Sec    16.18      9.78    50.00     68.27%
+  3529 requests in 30.04s, 602.87MB read
+  Socket errors: connect 0, read 267, write 23, timeout 0
+Requests/sec:    117.49
+Transfer/sec:     20.07MB
+```
