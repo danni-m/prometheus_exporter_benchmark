@@ -39,7 +39,7 @@ func main() {
 					"foo": "bar",
 				},
 			})
-		c.Add(11.22)
+		c.Add(42.32)
 		prometheus.MustRegister(c)
 	}
 
